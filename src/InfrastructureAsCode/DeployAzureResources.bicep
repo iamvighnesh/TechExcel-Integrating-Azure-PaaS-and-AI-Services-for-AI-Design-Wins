@@ -1,5 +1,5 @@
 @description('Location of the resources')
-param location string = resourceGroup().location
+param location string = 'swedencentral'
 
 @description('Password for the SQL Server admin user. PLEASE CHANGE THIS BEFORE DEPLOYMENT!')
 param sqlAdminPassword string = 'g@G9@2nD7C1BP%uh'
@@ -26,8 +26,8 @@ param restore bool = false
 param apimPublisherEmail string = 'support@contososuites.com'
 
 var apiManagementServiceName = 'apim-${uniqueString(resourceGroup().id)}'
-var apimSku = 'Basicv2'
-var apimSkuCount = 1
+var apimSku = 'Consumption'
+var apimSkuCount = 0
 var apimPublisherName = 'Contoso Suites'
 
 var cosmosDbName = '${uniqueString(resourceGroup().id)}-cosmosdb'
@@ -120,6 +120,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   kind: 'StorageV2'
   properties: {
     accessTier: 'Hot'
+    minimumTlsVersion: 'TLS1_2'
   }
 }
 
